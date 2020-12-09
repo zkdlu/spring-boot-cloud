@@ -50,6 +50,9 @@ dependencies {
 ```
 2. application.yml 작성
 ```yml
+server:
+  port: 8081
+  
 spring:
   application:
     name: serviceA
@@ -67,7 +70,7 @@ eureka:
 > - @EnableDiscoveryClient : spring-cloud-common에 존재, 다른 클라이언트 구현체(컨설,주키퍼 등)을 지원
 > - @EnableEurekaClient : spring-cloud-netflix에 존재, 유레카만 지원
 
-## 2. Zuul
+## 3. Zuul
 1. 의존성 추가
 ```gradle
 dependencies {
@@ -101,3 +104,6 @@ zuul:
 @SpringBootApplication
 public class ZuulApplication {
 ```
+
+## 4. 테스트
+- client 서비스는 localhost:8081/ 인데 zuul 라우트를 통해 localhost:8080/으로 연결 됨
