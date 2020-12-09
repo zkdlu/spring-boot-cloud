@@ -1,3 +1,9 @@
+# Eureka
+- 마이크로 서비스들의 정보를 레지스트리에 등록할 수 있도록 하고 마이크로 서비스의 동적인 탐색과 로드밸런싱을 제공
+
+# Zuul
+- 모든 마이크로 서비스에 대한 요청을 먼저 받아들이고 라우팅하는 프록시 API Gateway기능 수행
+
 ## 1. Eureka Server
 - @EnableEurekaServer
 ```yml
