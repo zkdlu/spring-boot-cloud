@@ -67,79 +67,37 @@ eureka:
 > - @EnableDiscoveryClient : spring-cloud-common에 존재, 다른 클라이언트 구현체(컨설,주키퍼 등)을 지원
 > - @EnableEurekaClient : spring-cloud-netflix에 존재, 유레카만 지원
 
-
-
-
-- @EnableEurekaServer
+## 2. Zuul
+1. 의존성 추가
+```gradle
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
+}
+```
+> API Gateway도 서비스의 하나인 듯
+2. application.yml 작성
 ```yml
-server:
-  port: 8761
-
 spring:
   application:
-    name: eureka-server
+    name: api-gateway-service
 
 eureka:
-  server:
-    response-cache-update-interval-ms: 1000
   client:
-    register-with-eureka: false
-    fetch-registry: false
     service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-```
-
-## 2. Eureka Client
-- @EnableEurekaClient
-```yml
-server:
-  port: 8081
-
-spring:
-  application:
-    name: serviceA
-
-eureka:
-  instance:
-    prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 30
-  client:
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-```
-
-## 3. Zuul Gateway
-- @EnableZuulProxy
-- `@EnableZuulServer는 자체 라우팅 서비스를 만들고 내장된 주울 기능을 사용하지 않을 때 사용`
-```yml
-spring:
-  application:
-    name: zuul-gateway
-
-server:
-  port: 8100
+      defaultZone: ${EUREKA_URL:http://localhost:8787/eureka}
 
 zuul:
   routes:
     serviceA:
-      path: /service/**
-      serviceId: serviceA
-
-ribbon:
-  eureka:
-    enabled: false
-
-serviceA:
-  ribbon:
-    listOfServers: http://localhost:8081, http://localhost:8082
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      path: /**
+      service-id: serviceA
+```
+3. 어노테이션 추가
+> @EnableZuulServer는 자체 라우팅 서비스를 만들고 내장된 주울 기능을 사용하지 않을 때 사용
+```java
+@EnableDiscoveryClient
+@EnableZuulProxy
+@SpringBootApplication
+public class ZuulApplication {
 ```
