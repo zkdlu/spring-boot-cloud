@@ -9,11 +9,41 @@
 > - 레지스트리의 정보는 모든 Eureka Client에 복제 됨. 가용 상태인 서비스 목록을 확인 가능하며 30초마다 갱신 됨.
 > - 가용상태의 서비스 목록을 확인할 경우 서비스의 이름을 기준으로 탐색하여 내부적으로 Ribbon (클라이언트 측 로드밸런서)를 사용한다.
 
-
 # Zuul
 - 모든 마이크로 서비스에 대한 요청을 먼저 받아들이고 라우팅하는 프록시 API Gateway기능 수행
 
 ## 1. Eureka Server
+1. 의존성 추가
+```gradle
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+}
+```
+2. application.yml 작성
+```yml
+server:
+  port: 8787
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+```
+3. @EnableEurekaServer 어노테이션 추가
+```java
+@EnableEurekaServer
+@SpringBootApplication
+public class ServerApplication {
+...
+```
+
+
+
+
 - @EnableEurekaServer
 ```yml
 server:
