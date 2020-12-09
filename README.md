@@ -57,9 +57,13 @@ spring:
 eureka:
   client:
     service-url:
-      default-zone: ${EUREKA_URL:http://127.0.0.1:8787/eureka/}
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:8787/eureka/} // default-zone이라고 하니까 안되는데 이거떄문인가 우연인가.
 ```
 3. 어노테이션 추가
+```java
+@EnableDiscoveryClient
+```
+
 > - @EnableDiscoveryClient : spring-cloud-common에 존재, 다른 클라이언트 구현체(컨설,주키퍼 등)을 지원
 > - @EnableEurekaClient : spring-cloud-netflix에 존재, 유레카만 지원
 
