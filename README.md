@@ -41,6 +41,24 @@ public class ServerApplication {
 ...
 ```
 
+## 2. Eureka Client
+1. 의존성 추가
+```gradle
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+}
+```
+2. application.yml 작성
+```yml
+spring:
+  application:
+    name: serviceA
+
+eureka:
+  client:
+    service-url:
+      default-zone: ${EUREKA_URL:http://127.0.0.1:8787/eureka/}
+```
 
 
 
