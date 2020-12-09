@@ -1,27 +1,15 @@
 spring:
   application:
-    name: zuul-gateway
+    name: api-gateway-service
 
-server:
-  port: 8100
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8787/eureka}
 
 zuul:
   routes:
     serviceA:
-      path: /service/**
-      serviceId: serviceA
+      path: /**
+      service-id: serviceA
 
-ribbon:
-  eureka:
-    enabled: false
-
-serviceA:
-  ribbon:
-    listOfServers: http://localhost:8081, http://localhost:8082
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/

@@ -1,22 +1,23 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.4.RELEASE'
+    id 'org.springframework.boot' version '2.3.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
 }
 
 group = 'com.zkdlu'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
 }
 
 ext {
-    set('springCloudVersion', "Hoxton.SR8")
+    set('springCloudVersion', "Hoxton.SR9")
 }
 
 dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
