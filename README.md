@@ -111,3 +111,22 @@ public class ZuulApplication {
 
 ## 4. 테스트
 - client 서비스는 localhost:8081/ 인데 zuul 라우트를 통해 localhost:8080/으로 연결 됨
+
+## 5. 기타
+- Eureka Client를 종료 했을 때 Server에 인스턴스가 내려가게 하고 싶었다.
+- 맞는 방법인진 모르겠다.
+1. Eureka Server 자기 보호 모드 비활성화
+```yml
+eureka:
+  server:
+    enable-self-preservation: false # 자기 보호 모드(네트워크 장애가 발생하여도 서비스 해제를 방지하는 모드)
+```
+2. Eureka Client 하트비트 전송
+```yml
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 1 # 디스커버리한테 1초마다 하트비트 전송
+    lease-expiration-duration-in-seconds: 2 # 디스커버리는 서비스 등록 해제 하기 전에 마지막 하트비트에서부터 2초 기다림
+```
+
+이러니까 되긴 하더라.
