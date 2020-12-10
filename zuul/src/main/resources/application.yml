@@ -5,11 +5,11 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_URL:http://localhost:8787/eureka}
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
 
 zuul:
   routes:
     serviceA:
-      path: /**
-      service-id: serviceA
+      path: /test/**
+      service-id: SERVICEA
 
