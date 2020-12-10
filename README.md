@@ -33,6 +33,10 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
 ```
+> - register-with-eureka: eureka의 registry에 등록할지 여부
+> - fetch-registry: registry에 있는 정보를 가져올지 여부
+> - eureka-server는 사용하지 않으므로 false (기본값은 true)
+
 3. @EnableEurekaServer 어노테이션 추가
 ```java
 @EnableEurekaServer
