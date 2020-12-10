@@ -33,6 +33,10 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
 ```
+> - register-with-eureka: eureka의 registry에 등록할지 여부
+> - fetch-registry: registry에 있는 정보를 가져올지 여부
+> - eureka-server는 사용하지 않으므로 false (기본값은 true)
+
 3. @EnableEurekaServer 어노테이션 추가
 ```java
 @EnableEurekaServer
@@ -50,6 +54,9 @@ dependencies {
 ```
 2. application.yml 작성
 ```yml
+server:
+  port: 8081
+  
 spring:
   application:
     name: serviceA
@@ -67,7 +74,7 @@ eureka:
 > - @EnableDiscoveryClient : spring-cloud-common에 존재, 다른 클라이언트 구현체(컨설,주키퍼 등)을 지원
 > - @EnableEurekaClient : spring-cloud-netflix에 존재, 유레카만 지원
 
-## 2. Zuul
+## 3. Zuul
 1. 의존성 추가
 ```gradle
 dependencies {
@@ -90,8 +97,8 @@ eureka:
 zuul:
   routes:
     serviceA:
-      path: /**
-      service-id: serviceA
+      path: /test/**
+      service-id: SERVICEA
 ```
 3. 어노테이션 추가
 > @EnableZuulServer는 자체 라우팅 서비스를 만들고 내장된 주울 기능을 사용하지 않을 때 사용
@@ -101,3 +108,25 @@ zuul:
 @SpringBootApplication
 public class ZuulApplication {
 ```
+
+## 4. 테스트
+- client 서비스는 localhost:8081/ 인데 zuul 라우트를 통해 localhost:8080/으로 연결 됨
+
+## 5. 기타
+- Eureka Client를 종료 했을 때 Server에 인스턴스가 내려가게 하고 싶었다.
+- 맞는 방법인진 모르겠다.
+1. Eureka Server 자기 보호 모드 비활성화
+```yml
+eureka:
+  server:
+    enable-self-preservation: false # 자기 보호 모드(네트워크 장애가 발생하여도 서비스 해제를 방지하는 모드)
+```
+2. Eureka Client 하트비트 전송
+```yml
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 1 # 디스커버리한테 1초마다 하트비트 전송
+    lease-expiration-duration-in-seconds: 2 # 디스커버리는 서비스 등록 해제 하기 전에 마지막 하트비트에서부터 2초 기다림
+```
+
+이러니까 되긴 하더라.
