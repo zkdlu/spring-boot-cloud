@@ -97,8 +97,8 @@ eureka:
 zuul:
   routes:
     serviceA:
-      path: /**
-      service-id: serviceA
+      path: /test/**
+      service-id: SERVICEA
 ```
 3. 어노테이션 추가
 > @EnableZuulServer는 자체 라우팅 서비스를 만들고 내장된 주울 기능을 사용하지 않을 때 사용
