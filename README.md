@@ -11,6 +11,16 @@
 
 # Zuul
 - 모든 마이크로 서비스에 대한 요청을 먼저 받아들이고 라우팅하는 프록시 API Gateway기능 수행
+- Zuul 로만 게이트웨이를 만들어도 라우팅이 된다.
+```yml
+zuul:
+  routes:
+    serviceA:
+      path: /test/**
+      url: http://
+```
+
+이런식으로
 
 # Ribbon
 - 클라이언트 측 로드 밸런서
