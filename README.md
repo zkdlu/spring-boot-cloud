@@ -23,7 +23,7 @@ zuul:
 이런식으로
 > 오히려 안정적인데?
 
-> 참고: https://eblo.tistory.com/69
+> 참고: https://eblo.tistory.com/69, https://woowabros.github.io/r&d/2017/06/13/apigateway.html
 
 # Ribbon
 - 클라이언트 측 로드 밸런서
