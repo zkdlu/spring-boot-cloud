@@ -71,6 +71,9 @@ eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_URL:http://127.0.0.1:8787/eureka/} // default-zone이라고 하니까 안되는데 이거떄문인가 우연인가.
+ribbon:
+  eureka:
+    enabled: true
 ```
 3. 어노테이션 추가
 ```java
