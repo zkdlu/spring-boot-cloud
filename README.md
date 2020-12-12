@@ -27,6 +27,7 @@ zuul:
 이런식으로
 > 오히려 안정적인데?
 
+<img src="http://13.125.231.217/wp-content/uploads/2018/03/zuul_architecture.png" width="50%" height="50%"/>
 > 참고: https://eblo.tistory.com/69, https://woowabros.github.io/r&d/2017/06/13/apigateway.html
 
 # Ribbon
