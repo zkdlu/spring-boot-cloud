@@ -11,6 +11,10 @@
 
 # Zuul
 - 모든 마이크로 서비스에 대한 요청을 먼저 받아들이고 라우팅하는 프록시 API Gateway기능 수행
+  1. Pre Filter - 라우팅전에 실행되며 필터. 주로 logging, 인증등이 pre Filter에서 이루어 진다.
+  2. Routing Filter - 요청에 대한 라우팅을 다루는 필터. Apache httpclient를 사용하여 정해진 Url로 보낼수 있고, Neflix Ribbon을 사용하여 동적으로 라우팅 할 수도 있다.
+  3. Post Filter - 라우팅 후에 실행되는 필터. response에 HTTP header를 추가하거나, response에 대한 응답속도, Status Code, 등 응답에 대한 statistics and metrics을 수집한다.
+  4. Error Filter - 에러 발생시 실행되는 필터이다.
 - Zuul 로만 게이트웨이를 만들어도 라우팅이 된다.
 ```yml
 zuul:
